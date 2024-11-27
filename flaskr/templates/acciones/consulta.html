@@ -1,0 +1,58 @@
+{% extends 'dashboard/consulta.html' %}
+{%block pagetitle %}
+<p class="text-2xl mb-4">Historial de Acciones</p>
+{%endblock%}
+{% block dynamic %}
+<div class="h-96 max-h-96 px-6 mx-auto overflow-y-scroll no-scrollbar">
+    <div>
+        <form action="{{ url_for('acciones.consulta')}}" method="POST" class="my-2">
+            <label class="font-semibold text-lg" for="campo">Busqueda:</label>
+            <Select class="border rounded-md" name="campo" id="campo" required>
+                <option value="Almacen" selected>Almacen</option>
+                <option value="u.Nombre">Usuario</option>
+                <option value="p.Nombre">Producto</option>
+                <option value="Fecha">Fecha</option>
+            </Select>
+            <label class="font-semibold text-lg" for="valor">Valor</label>
+            <input class="border rounded-lg px-2" name="valor" id="valor">
+
+            <label class="font-semibold text-lg" for="desc">Orden</label>
+            <Select class="border rounded-md" name="desc" id="desc" required>
+                <option value="ASC" selected>A->Z</option>
+                <option value="DESC">Z->A</option>
+            </Select>
+
+            <label class="font-semibold text-lg" for="max">No.de Resultados</label>
+            <input class= "border px-2 rounded-md w-16" type="number" name="max" id="max" min="0">
+
+            <button class="bg-primary rounded-lg p-2 text-white cursor-pointer" type="submit">Consulta</button>
+        </form>
+
+
+    </div>
+    <table class="border-collapse w-full table-fixed text-sm">
+        <thead>
+            <tr class=" bg-slate-300 text-center">
+                <th class="w-[5%]">Almacén</th>
+                <th class="w-[10%]">Usuario</th>
+                <th class="w-[30%]">Producto</th>
+                <th class="w-[30%]">Acción</th>
+                <th class="w-[25%]">Fecha</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for accion in acciones %}
+            <tr class="text-center border">
+                <td>{{ accion.Almacen }}</td>
+                <td>{{ accion.Usuario }}</td>
+                <td class="text-start border-l">{{ accion.Producto }}</td>
+                <td class="text-start border-l">{{ accion.Accion }}</td>
+                <td>{{ accion.Fecha }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'dashboard/main.html' %}
+{% block child %}
+
+<p class="text-lg">Registrar</p>
+<div class="grid grid-flow-col auto-cols-max gap-2 my-4">
+    <a class="border rounded-lg p-2 hover:bg-slate-400 hover:text-white" href="{{ url_for('movimientos.registrar', val='x')}}">Registar movimientos</a>
+</div>
+
+{% block dynamic %}{% endblock %}
+
+{% endblock %}

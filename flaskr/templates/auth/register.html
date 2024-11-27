@@ -1,0 +1,30 @@
+{% extends 'dashboard/registro.html' %}
+
+{% block header %}
+<h1>{% block title %}Registro{% endblock %}</h1>
+{% endblock %}
+
+{% block dynamic %}
+<form method="post" class="border shadow-md rounded-lg p-4 w-fit">
+  <label class="font-semibold text-lg" for="usuario">Usuario:</label>
+  <input value="{{ request.form['usuario'] or usr['Usuario'] }}" class="border mb-4 w-full rounded-lg px-2" name="usuario"
+    id="usuario" required>
+  <br>
+  <label class="font-semibold text-lg" for="contrasena">Contraseña:</label>
+  <input value="{{ request.form['contrasena'] or usr['Contrasena'] }}" class="border mb-4 w-full rounded-lg px-2"
+    type="password" name="contrasena" id="contrasena" required {{ "readonly" if usr!=None else "" }}>
+  <br>
+  <label class="font-semibold text-lg" for="nombre">Nombre:</label>
+  <input value="{{ request.form['nombre'] or usr['Nombre'] }}" class="border mb-4 w-full rounded-lg px-2" name="nombre"
+    id="nombre" required>
+  <br>
+  <label class="font-semibold text-lg" for="puesto">Puesto:</label>
+  <Select class="border rounded-md" class="mb-4 border rounded-md" name="puesto" id="puesto">
+    <option {{ "selected='selected'" if usr['Puesto']=='A' else "" }} value="A">Administrador</option>
+    <option {{ "selected='selected'" if usr['Puesto']=='S' else "" }} value="S">Supervisor</option>
+    <option {{ "selected='selected'" if usr['Puesto']=='E' else "" }} value="E">Empleado</option>
+  </select>
+  <br>
+  <input class="bg-primary rounded-lg p-2 text-white cursor-pointer" type="submit" value="Guardar">
+</form>
+{% endblock %}

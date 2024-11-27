@@ -1,0 +1,14 @@
+{% extends 'dashboard/consulta.html' %}
+{% block dynamic %}
+<form method="post" class="border shadow-md rounded-lg p-4 w-fit">
+    <p class="text-xl font-semibold">Proveedores</p>
+    <label class="font-semibold text-lg" for="nombre">Nombre:</label>
+    <input class="border w-full rounded-md px-2 mb-4" value="{{ request.form['nombre'] or prov['Nombre'] }}" type="text" id="nombre" name="nombre" required>
+    <br>
+    <label class="font-semibold text-lg" for="telefono">Teléfono:</label>
+    <input class="border w-full rounded-md px-2 mb-4" value="{{ request.form['telefono'] or prov['Telefono'] }}" type="text" id="telefono" name="telefono">
+    <br>
+    <button class="bg-primary rounded-lg p-2 text-white cursor-pointer" type="submit">Guardar</button>
+</form>
+
+{% endblock %}

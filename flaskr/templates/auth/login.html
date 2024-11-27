@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <p class="text-4xl font-bold">{% block title %}Log In{% endblock %}</p>
+{% endblock %}
+
+{% block content %}
+  <form method="post" class="border shadow-xl p-4 mx-10 my-10 rounded-lg w-fit">
+    <label class="font-semibold text-lg" for="usuario">Usuario</label>
+    <input class="border rounded-md px-2 mb-2 w-full" name="usuario" id="usuario" required>
+    <br>
+    <label class="font-semibold text-lg" for="contrasena">Contraseña</label>
+    <input class="border rounded-md px-2 mb-2 w-full" type="password" name="contrasena" id="contrasena" required>
+    <br>
+    <input class="bg-primary rounded-lg p-2 text-white cursor-pointer" type="submit" value="Ingresa">
+  </form>
+{% endblock %}

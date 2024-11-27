@@ -1,0 +1,15 @@
+{% extends 'dashboard/consulta.html' %}
+{% block dynamic %}
+<form method="post" class="border shadow-md rounded-lg p-4 w-fit">
+    <p class="text-xl font-semibold">Categorias</p>
+    <br>
+    <label class="font-semibold text-lg" for="clave">Clave:</label>
+    <input class="border w-full rounded-md px-2 mb-4" value="{{ request.form['clave'] or cat['Clave'] }}" type="text" id="clave" name="clave" required>
+    <br>
+    <label class="font-semibold text-lg" for="descripcion">Descripción:</label>
+    <input class="border w-full rounded-md px-2 mb-4" value="{{ request.form['descripcion'] or cat['Descripcion'] }}" type="text" id="descripcion" name="descripcion">
+    <br>
+    <button class="bg-primary rounded-lg p-2 text-white cursor-pointer" type="submit">Guardar</button>
+</form>
+
+{% endblock %}

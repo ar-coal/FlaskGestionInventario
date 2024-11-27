@@ -1,0 +1,30 @@
+{% extends 'dashboard/main.html' %}
+{% block child %}
+<p class="text-lg">Consultas</p>
+<div class="grid grid-flow-col auto-cols-max gap-2 my-4">
+    <a class="border rounded-lg p-2 hover:bg-slate-400 hover:text-white"
+        href="{{ url_for('dashboard.consulta', val='almacen')}}">Almacenes</a>
+    <a class="border rounded-lg p-2 hover:bg-slate-400 hover:text-white"
+        href="{{ url_for('dashboard.consulta', val='categoria')}}">Categorias</a>
+    {% if g.user['Puesto'] != 'E'%}
+    <a class="border rounded-lg p-2 hover:bg-slate-400 hover:text-white"
+        href="{{ url_for('dashboard.consulta', val='acciones')}}">Historial de acciones</a>
+    {% endif%}
+    <a class="border rounded-lg p-2 hover:bg-slate-400 hover:text-white"
+        href="{{ url_for('dashboard.consulta', val='productos')}}">Productos</a>
+    <a class="border rounded-lg p-2 hover:bg-slate-400 hover:text-white"
+        href="{{ url_for('dashboard.consulta', val='proveedor')}}">Proveedores</a>
+    <a class="border rounded-lg p-2 hover:bg-slate-400 hover:text-white"
+        href="{{ url_for('dashboard.consulta', val='ubicacion')}}">Ubicaciones</a>
+    {% if g.user['Puesto'] == 'A'%}
+    <a class="border rounded-lg p-2 hover:bg-slate-400 hover:text-white"
+        href="{{ url_for('dashboard.consulta', val='auth')}}">Usuarios</a>
+    {%endif%}
+</div>
+
+{%block pagetitle%}
+{% endblock %}
+
+{% block dynamic%}
+{% endblock %}
+{% endblock %}

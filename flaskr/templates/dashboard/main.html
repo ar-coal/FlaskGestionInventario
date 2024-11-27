@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<p class="text-4xl font-bold">{% block title %}Dashboard{% endblock %}</p>
+{% endblock %}
+
+{% block nav %}
+<div class="my-6" >
+    <a class="hover:font-semibold" href="{{ url_for('dashboard.consulta',val='productos') }}">Consultas</a>
+    <br><br>
+    <a class="hover:font-semibold" href="{{ url_for('dashboard.registro') }}">Registros</a>
+</div>
+{% endblock %}
+
+
+{% block content %}
+
+{% block child %}{% endblock %}
+
+{% endblock %}

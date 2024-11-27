@@ -1,0 +1,22 @@
+{% extends 'dashboard/consulta.html' %}
+{% block dynamic %}
+<form method="post" class="border shadow-md rounded-lg p-4 w-fit">
+    <p class="text-xl font-semibold">Almacenes</p>
+    <br>
+    <label class="font-semibold text-lg" for="ubicacion">Ubicacion</label>
+    <Select class="border rounded-md mb-4 px-2 w-1/2" name="ubicacion" id="ubicacion" required>
+        {% for ubicacion in ubicaciones %}
+        <option value="{{ ubicacion['Clave'] }}" {{ "selected='selected'" if ubicacion['Clave']==alm['Ubicacion']
+            else "" }}>
+            {{ ubicacion['Nombre']}} </option>
+        {% endfor %}
+    </Select>
+    <br>
+    <label class="font-semibold text-lg" for="capacidad">Capacidad:</label>
+    <input class="border rounded-md w-full mb-4 px-2" value="{{ request.form['capacidad'] or alm['Capacidad'] }}" type="number" id="capacidad" name="capacidad"
+        min="0" required>
+    <br>
+    <button class="bg-primary rounded-lg p-2 text-white cursor-pointer" type="submit">Guardar</button>
+</form>
+
+{% endblock %}

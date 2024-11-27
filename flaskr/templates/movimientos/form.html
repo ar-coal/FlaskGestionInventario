@@ -1,0 +1,53 @@
+{% extends 'dashboard/registro.html' %}
+{% block dynamic %}
+{% if tipo == 'E' %}
+<form method="POST" action="{{ url_for('movimientos.entradas', clave=prod['Clave']) }}" class="border shadow-md rounded-lg p-4 w-fit">
+
+    <label class="font-semibold text-lg" for="nombre">Nombre</label>
+    <input class="border w-full rounded-md px-2 mb-4" name="nombre" id="nombre" value="{{prod['Nombre']}}" readonly>
+    <label class="font-semibold text-lg" for="cantidad">Catidad a ingresar</label>
+    <input class="border w-full rounded-md px-2 mb-4" type="number" name="cantidad" id="cantidad" min="0"
+        placeholder="{{prod['CantidadDisponible'] }}" required>
+
+    <input class="bg-primary rounded-lg p-2 text-white cursor-pointer" type="submit" value="Registrar Entrada">
+</form>
+
+{% elif tipo == 'S' %}
+
+<form method="POST" class="" action="{{ url_for('movimientos.salidas', clave=prod['Clave']) }}" class="border shadow-md rounded-lg p-4 w-fit">
+
+    <label class="font-semibold text-lg" for="nombre">Nombre</label>
+    <input class="border w-full rounded-md px-2 mb-4" name="nombre" id="nombre" value="{{prod['Nombre']}}" readonly>
+    <label class="font-semibold text-lg" for="cantidad">Catidad a retirar</label>
+    <input class="border w-full rounded-md px-2 mb-4" type="number" name="cantidad" id="cantidad" min="0" max="{{prod['CantidadDisponible']}}"
+    placeholder="{{prod['CantidadDisponible'] }}" required>
+    <input class="bg-danger rounded-lg p-2 text-white cursor-pointer" type="submit" value="Registrar Salida">
+</form>
+
+{% elif tipo == 'C' %}
+<form method="POST" class="border shadow-md rounded-lg p-4 w-fit">
+
+    <label class="font-semibold text-lg" for="almacenOrg">Almacen de origen</label>
+    <Select class="border rounded-md" name="almacenOrg" id="almacenOrg">
+        {% for almacen in almacenes %}
+        <option value="{{ almacen['Clave'] }}" {{ "selected='selected'" if almacen['Clave'] == prod['Almacen'] else "" }} >Almacen {{almacen['Clave']}}-{{ almacen['Nombre'] }} cap:
+            {{almacen['Capacidad']}}</option>
+        {% endfor %}
+    </Select>
+
+    <label class="font-semibold text-lg" for="almacenDes">Almacen de destino</label>
+    <Select class="border rounded-md" name="almacenDes" id="almacenDes">
+        {% for almacen in almacenes %}
+        <option value="{{ almacen['Clave'] }}" >Almacen {{almacen['Clave']}}-{{ almacen['Nombre'] }} cap:{{almacen['Capacidad']}}</option>
+        {% endfor %}
+    </Select>
+
+    <label class="font-semibold text-lg" for="cantidad">Catidad a mover</label>
+    <input class="border w-full rounded-md px-2 mb-4" type="number" name="cantidad" id="cantidad" min="0" max="{{prod['CantidadDisponible']}}"
+    value="{{prod['CantidadDisponible'] }}" required>
+
+    <input class="bg-success rounded-lg p-2 text-white cursor-pointer" type="submit" value="Registrar Cambio">
+</form>
+{% endif %}
+
+{% endblock %}

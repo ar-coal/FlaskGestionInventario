@@ -1,0 +1,56 @@
+
+{% extends 'dashboard/consulta.html' %}
+{% block dynamic %}
+<div class="overflow-y-scroll no-scrollbar h-96">
+    <form method="POST" class="border shadow-md rounded-lg p-4 w-fit  ">
+        <label class="font-semibold text-lg" for="almacen">Almacen</label>
+        <Select class="border rounded-md mb-4 w-full" name="almacen" id="almacen">
+            {% for almacen in almacenes %}
+            <option value="{{ almacen['Clave'] }}" {{ "selected='selected'" if almacen['Clave']==prod['Almacen'] else ""
+                }}>
+                Almacen {{almacen['Clave']}}-{{ almacen['Nombre'] }} cap:
+                {{almacen['Capacidad']}}</option>
+            {% endfor %}
+        </Select>
+        <br>
+        <label class="font-semibold text-lg" for="categoria">Categoria</label>
+        <Select class="border rounded-md mb-4" name="categoria" id="categoria">
+            {% for categoria in categorias %}
+            <option value="{{ categoria['Clave'] }}" {{ "selected='selected'" if categoria['Clave']==prod['Categoria']
+                else "" }}>{{categoria['Descripcion']}}</option>
+            {% endfor %}
+        </Select>
+        <br>
+        <label class="font-semibold text-lg" for="proveedor">Proveedor</label>
+        <Select class="border rounded-md mb-4" name="proveedor" id="proveedor">
+            {% for proveedor in proveedores %}
+            <option value="{{ proveedor['Clave'] }}" {{ "selected='selected'" if proveedor['Clave']==prod['Proveedor']
+                else "" }}>{{proveedor['Nombre']}}</option>
+            {% endfor %}
+        </Select>
+        <br>
+        <label class="font-semibold text-lg" for="nombre">Nombre</label>
+        <input class="border rounded-md mb-4 px-2 w-full " name="nombre" id="nombre"
+            value="{{ request.form['nombre'] or prod['Nombre'] }}" required>
+        <br>
+
+        <label class="font-semibold text-lg" for="fecha_cad">Fecha de caducidad</label>
+        <input class="border rounded-md mb-4 px-2 w-full " type='date' name="fecha_cad" id="fecha_cad"
+            value="{{ request.form['fecha_cad'] or prod['fechaCaducidad'] }}" required>
+        <br>
+        <label class="font-semibold text-lg" for="cantidad">Cantidad</label>
+        <input class="border rounded-md mb-4 px-2 w-full " type="number" name="cantidad" id="cantidad" min="0"
+            value="{{ request.form['cantidad'] or prod['CantidadDisponible'] }}" placeholder="0" required readonly>
+        <br>
+        <label class="font-semibold text-lg" for="alerta">Alerta cuando haya menos de:</label>
+        <input class="border rounded-md mb-4 px-2 w-full " typer="number" name="alerta" id="alerta" min="0"
+            value="{{ request.form['cantidad'] or prod['CantidadMinima'] }}" required>
+
+
+        <input class="bg-primary rounded-lg p-2 text-white cursor-pointer" type="submit" value="Registrar">
+    </form>
+
+
+</div>
+
+{% endblock %}

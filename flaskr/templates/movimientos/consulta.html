@@ -1,0 +1,76 @@
+{% extends 'dashboard/registro.html' %}
+{% block dynamic %}
+
+<div>
+    <form action="{{ url_for('movimientos.registrar', val='nombre')}}" method="get" class="mb-2">
+        <label class="font-semibold text-lg" for="nombre">Nombre</label>
+        <input class="border rounded-lg px-2" name="nombre" id="nombre" required>
+        <button class="p-1 rounded-lg text-white bg-primary">Consultar con nombre</button>
+    </form>
+
+    <form action="{{ url_for('movimientos.registrar', val='clave')}}" method="get" class="mb-2">
+        <label class="font-semibold text-lg" for="clave">Clave</label>
+        <input class="border rounded-lg px-2" name="clave" id="clave" required>
+        <button class="p-1 rounded-lg text-white bg-primary">Consultar con Clave</button>
+    </form>
+
+    <form action="{{ url_for('movimientos.registrar', val='x')}}" method="get" class="mb-2">
+        <button class=" border p-1 rounded-lg hover:text-white hover:bg-danger">Eliminar filtros</button>
+    </form>
+
+</div>
+
+
+<div>
+    <table class="border-collapse w-full table-fixed">
+        <thead>
+            <tr class="bg-slate-300 text-center">
+                <th class="w-[10%]">Clave</th>
+                <th class="w-[10%]">Almacen</th>
+                <th class="w-[50%]">Nombre</th>
+                <th class="w-[10%]">Cantidad</th>
+                <th class="w-[20%]">Accion</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for resultado in resultados %}
+            <tr class="border text-center">
+                <td>{{ resultado.Clave }}</td>
+                <td>{{ resultado.Almacen }}</td>
+                <td class="text-start">{{ resultado.Nombre }}</td>
+                <td>{{ resultado.CantidadDisponible }}</td>
+                <td class="flex">
+                    <form action="{{ url_for('movimientos.entradas', clave=resultado['Clave']) }}" method="get">
+                        <button class="bg-primary stroke-white p-1 rounded-md mx-1"><svg
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                            </svg>
+                        </button>
+                    </form>
+                    <form action="{{ url_for('movimientos.salidas', clave=resultado['Clave']) }}" method="get">
+                        <button class="bg-danger stroke-white p-1 rounded-md mx-1"><svg
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
+                            </svg>
+                        </button>
+                    </form>
+                    <form action="{{ url_for('movimientos.cambio', clave=resultado['Clave']) }}" method="get">
+                        <button class="bg-success stroke-white p-1 rounded-md mx-1"><svg
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 0 0-3.7-3.7 48.678 48.678 0 0 0-7.324 0 4.006 4.006 0 0 0-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 0 0 3.7 3.7 48.656 48.656 0 0 0 7.324 0 4.006 4.006 0 0 0 3.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3-3 3" />
+                            </svg>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+{% endblock %}
